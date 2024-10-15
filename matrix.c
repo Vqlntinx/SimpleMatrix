@@ -143,20 +143,19 @@ void matrix_print(matrix *mat)
 
 void measure_matrix_operation(matrix* (*matrix_op)(matrix*, matrix*),
                                    matrix *a, matrix *b, const char *operation_name) {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
         matrix_rand(a);
         matrix_rand(b);
 
-        clock_t start = clock();  // ½ÃÀÛ ½Ã°£ ÃøÁ¤
+        clock_t start = clock(); 
 
-        // Àü´ÞµÈ ¿¬»ê ÇÔ¼ö ½ÇÇà
         matrix *res = matrix_op(a, b);
 
-        clock_t end = clock();  // ³¡ ½Ã°£ ÃøÁ¤
+        clock_t end = clock(); 
 
-        double time_taken = (double)(end - start) / CLOCKS_PER_SEC;  // ½ÇÇà ½Ã°£ °è»ê
-        printf("%dx%d Çà·Ä¿¡ ´ëÇÑ %s: %f ÃÊ\n", a->m, a->n, operation_name, time_taken);
+        double time_taken = (double)(end - start) / CLOCKS_PER_SEC;
+        printf("%dx%d í–‰ë ¬ì— ëŒ€í•œ %s: %f ì´ˆ\n", a->m, a->n, operation_name, time_taken);
 
-        matrix_free(res);  // °á°ú Çà·Ä ¸Þ¸ð¸® ÇØÁ¦
+        matrix_free(res); 
     }
 }
