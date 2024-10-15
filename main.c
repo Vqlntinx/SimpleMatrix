@@ -35,30 +35,45 @@ int main()
     matrix_free(d);
     matrix_free(e);
 
-    int m = 1000, n = 1000;
+    //matrix calculation test
+    int m = 500, n = 500, p = 500;
     matrix *x = matrix_new(m, n);
     matrix *y = matrix_new(m, n);
     puts("\n");
 
-    printf("Çà·Ä µ¡¼À Å×½ºÆ®:\n");
-    measure_matrix_operation(matrix_add, x, y, "µ¡¼À");
+    printf("í–‰ë ¬ ë§ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_matrix_operation(matrix_add, x, y, "ë§ì…ˆ");
 
 
-    printf("Çà·Ä »¬¼À Å×½ºÆ®:\n");
-    measure_matrix_operation(matrix_sub, x, y, "»¬¼À");
+    printf("í–‰ë ¬ ëº„ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_matrix_operation(matrix_sub, x, y, "ëº„ì…ˆ");
 
 
-    matrix *z = matrix_new(n, n);
-    printf("Çà·Ä °ö¼À Å×½ºÆ®:\n");
-    measure_matrix_operation(matrix_mult, x, y, "°ö¼À");
+    matrix *z = matrix_new(n, p);
+    printf("í–‰ë ¬ ê³±ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_matrix_operation(matrix_mult, x, y, "ê³±ì…ˆ");
 
 
-    printf("Çà·Ä ³ª´°¼À Å×½ºÆ®:\n");
-    measure_matrix_operation(matrix_div, x, y, "³ª´°¼À");
+    printf("í–‰ë ¬ ë‚˜ëˆ—ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_matrix_operation(matrix_div, x, y, "ë‚˜ëˆ—ì…ˆ");
+
+
+
+    //smatrix calculation test
+    smatrix_entry *s_a = smatrix_new(x);
+    smatrix_entry *s_b = smatrix_new(y);
+
+    printf("í¬ì†Œ í–‰ë ¬ ë§ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_smatrix_operation(smatrix_add, s_a, s_b, "ë§ì…ˆ");
+    printf("í¬ì†Œ í–‰ë ¬ ëº„ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_smatrix_operation(smatrix_sub, s_a, s_b, "ëº„ì…ˆ");
+    printf("í¬ì†Œ í–‰ë ¬ ê³±ì…ˆ í…ŒìŠ¤íŠ¸:\n");
+    measure_smatrix_operation(smatrix_mult, s_a, s_b, "ê³±ì…ˆ");
 
     matrix_free(x);
     matrix_free(y);
     matrix_free(z);
-
+    smatrix_free(s_a);
+    smatrix_free(s_b);
     return 0;
 }
