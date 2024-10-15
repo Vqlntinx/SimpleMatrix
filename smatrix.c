@@ -115,3 +115,18 @@ void smatrix_print(smatrix_entry *smat)
         printf("%d %d %d\n", smat[i].r, smat[i].c, smat[i].v);
     printf("%d rows, %d columns, %d non-zero entries\n", smat[0].r, smat[0].c, smat[0].v);
 }
+
+void measure_smatrix_operation(matrix* (*smatrix_op)(smatrix_entry*, smatrix_entry*),smatrix_entry* s_a, smatrix_entry* s_b, const char* op_name) {
+    for (int i = 0; i < 10; i++) {
+        clock_t start = clock();
+
+        matrix *res = smatrix_op(s_a, s_b);
+
+        clock_t end = clock();
+
+        double time_taken = (double)(end - start) / CLOCKS_PER_SEC;
+        printf("%dx%d 행렬에 대한 %s: %f 초\n", s_a[0].r, s_a[0].c, op_name, time_taken);
+
+        matrix_free(res);
+    }
+}
